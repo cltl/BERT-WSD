@@ -47,7 +47,7 @@ class NAF:
         attrs = ['doc_name']
 
         for attr in attrs:
-            info.append(f'KEY: {attr}: {getattr(self, attr)}')
+            info.append('KEY: %s: %s' % (attr, getattr(self, attr)))
 
         return '\n'.join(info)
 
@@ -71,7 +71,7 @@ class NAF:
         term_els = doc.xpath('terms/term')
 
         # for now, I assume that NAF files should have the same number of wf and term elements
-        assert len(wf_els) == len(term_els), f'mismatch in number of wf and term elements'
+        assert len(wf_els) == len(term_els), 'mismatch in number of wf and term elements'
 
         ignored_pos = set()
         for wf_el, term_el in zip(wf_els, term_els):
@@ -88,7 +88,7 @@ class NAF:
 
             if wn_pos is None:
                 if self.verbose >= 3:
-                    print(f'could not map {naf_pos} to {wn_pos}')
+                    print('could not map %s to %s' % (naf_pos, wn_pos))
 
             token_obj = Token(token_id=token_id,
                               text=text,
@@ -98,13 +98,14 @@ class NAF:
 
 
         if self.verbose >= 2:
-            print(f'skipped pos labels: {ignored_pos}')
-            print(f'found {len(sentid2token_objs)} sentences')
+            print('skipped pos labels: %s' % ignored_pos)
+            print('found %s sentences' % {len(sentid2token_objs)})
 
         return sentid2token_objs
 
 
     def create_df(self, wn_version):
+
 
         list_of_lists = []
         headers = ['doc_name', 'pos',

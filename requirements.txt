@@ -2,8 +2,9 @@ lxml==4.3.0.0
 pandas==0.24.2
 nltk==3.4
 pytorch-pretrained-bert
-numpy==1.16.0
+numpy==1.15.0
 keras
-torch
-tensorflow
+torch==1.2.0
+tensorflow==1.14.0
 mock
+docopt

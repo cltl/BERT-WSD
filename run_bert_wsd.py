@@ -19,6 +19,10 @@ Example:
     python run_bert_wsd.py --input_folder="example_files" --meanings_path="example_files/meanings.bin" \
     --naf_pos="N-V-G-A" --use_pos_in_candidate_selection="yes" --verbose=2
 """
+
+import sys
+sys.path.insert(0, '/home/mcpostma/.local/lib/python3.5/site-packages')
+
 from docopt import docopt
 from glob import glob
 from datetime import datetime
@@ -31,6 +35,7 @@ from utils import time_in_correct_format
 import wsd_datasets_classes
 import perform_wsd
 import naf_utils
+
 
 # load arguments
 arguments = docopt(__doc__)
@@ -51,7 +56,7 @@ use_pos_in_candidate_selection = arguments['--use_pos_in_candidate_selection'] =
 
 # iterable
 if arguments['--input_folder']:
-    naf_iterable = glob(f'{arguments["--input_folder"]}/*naf')
+    naf_iterable = glob('%s/*naf' % arguments["--input_folder"])
 elif arguments['--input_path']:
     naf_iterable = [arguments['--input_path']]
 
@@ -59,9 +64,8 @@ elif arguments['--input_path']:
 tokenizer = BertTokenizer.from_pretrained(bert_model_variation, do_lower_case=True)
 model = BertModel.from_pretrained(bert_model_variation)
 
-# TODO: ask whether this is ok
-#model.cuda()
-#model.eval()
+model.cuda()
+model.eval()
 
 for naf_path in naf_iterable:
 
@@ -95,10 +99,13 @@ for naf_path in naf_iterable:
                                          df=wsd_df,
                                          resource=resource)
 
+
     doc.write(output_path,
               encoding='utf-8',
               pretty_print=True,
               xml_declaration=True)
+
+    print(start_time, end_time)
 
 
 

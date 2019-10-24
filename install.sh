@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 
-python -c 'import nltk;nltk.download("wordnet")'
+python3 -c 'import nltk;nltk.download("wordnet")'
