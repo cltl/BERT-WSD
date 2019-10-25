@@ -1,6 +1,6 @@
 lxml==4.3.0.0
 pandas==0.24.2
-nltk==3.4
+nltk==3.4.5
 pytorch-pretrained-bert
 numpy==1.15.0
 keras
