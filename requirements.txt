@@ -5,6 +5,6 @@ pytorch-pretrained-bert
 numpy==1.15.0
 keras
 torch==1.2.0
-tensorflow==1.14.0
+tensorflow==2.7.2
 mock
 docopt
